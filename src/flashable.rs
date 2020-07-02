@@ -14,7 +14,7 @@ pub trait Flashable {
     fn flash(&self, avr: &mut Avr);
 }
 
-/// An AVR firmware.
+/// A handle to a specific AVR firmware image.
 pub struct Firmware {
     /// The underlying firmware representation.
     firmware: simavr::elf_firmware_t,

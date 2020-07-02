@@ -1,3 +1,5 @@
+//! Logic relating to UART serial communication.
+
 use crate::Avr;
 use super::ioctl;
 
@@ -7,14 +9,13 @@ use std::os::raw::c_void;
 use std::ffi::CString;
 use std::ptr;
 
-
 /// The names of the IRQs we want to attach to.
 const IRQ_NAMES: &'static [&'static str] = &[
     "8<uart_pty.in", // Must be first
     "8>uart_pty.out",
 ];
 
-/// Attaches.
+/// Attaches the AVR UART to the current standard output stream.
 pub fn attach_to_stdout(avr: &mut Avr) {
     let irq_names: Vec<_> = IRQ_NAMES.iter()
                                       .map(|&irq| CString::new(irq).unwrap())

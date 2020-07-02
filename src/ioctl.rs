@@ -1,3 +1,5 @@
+//! Utilities relating to controlling IO pins.
+
 // TODO: We could move this into the 'simavr-sys' crate, because
 // the macro versions aren't in the generated bindings.
 

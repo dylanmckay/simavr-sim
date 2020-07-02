@@ -1,7 +1,13 @@
+//! High-level bindings to the `simavr` AVR simulator.
+//!
+//! This is a minimal set of high-level bindings that can be used
+//! to simulate an AVR MCU from Rust.
+
 extern crate simavr_sys as simavr;
 #[macro_use] extern crate bitflags;
 
 pub use self::flashable::{Flashable, Firmware};
+pub use simavr_sys as sys;
 
 pub mod uart;
 pub mod ioctl;
@@ -14,7 +20,7 @@ use std::mem;
 use std::ptr;
 use std::os::raw::*;
 
-/// An AVR instance.
+/// An AVR simulator instance.
 pub struct Avr {
     /// The underlying ffi type.
     avr: *mut simavr::avr_t,
@@ -55,6 +61,7 @@ pub enum State {
 }
 
 bitflags! {
+    /// Bitmasks for the flags inside the AVR status register.
     pub struct StatusRegister: u8 {
         /// The interrupt flag (`I`).
         const INTERRUPT_FLAG = 0b10000000;
@@ -76,6 +83,7 @@ bitflags! {
 }
 
 impl Avr {
+    /// Contructs an AVR simulator from a raw pointer to a `simavr` simulator.
     pub unsafe fn from_raw(avr: *mut simavr::avr_t) -> Self {
         // Set the simavr global logger hook.
         // We do this upon every new `Avr` object but we could
@@ -97,9 +105,9 @@ impl Avr {
     }
 
     /// Creates a new avr instance.
-    pub fn with_name(name: &str) -> Result<Self, &'static str> {
-        let name = CString::new(name).unwrap();
-        let avr = unsafe { simavr::avr_make_mcu_by_name(name.as_ptr()) };
+    pub fn new(mcu_name: &str) -> Result<Self, &'static str> {
+        let mcu_name = CString::new(mcu_name).unwrap();
+        let avr = unsafe { simavr::avr_make_mcu_by_name(mcu_name.as_ptr()) };
 
         if avr == ptr::null_mut() {
             return Err("could not create avr sim");
