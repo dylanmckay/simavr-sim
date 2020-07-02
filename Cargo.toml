@@ -4,7 +4,9 @@ version = "0.1.0"
 authors = ["Dylan McKay <me@dylanmckay.io>"]
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description = "High level bindings to the simavr AVR simulator"
+repository = "git@github.com:dylanmckay/simavr-sim.git"
+license = "GPL-3.0"
 
 [dependencies]
 bitflags = "1.2"
