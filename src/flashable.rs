@@ -88,7 +88,7 @@ mod test {
     use super::*;
 
     fn atmega328() -> Avr {
-        Avr::with_name("atmega328").unwrap()
+        Avr::new("atmega328").unwrap()
     }
 
     #[test]

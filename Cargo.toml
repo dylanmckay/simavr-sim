@@ -5,7 +5,7 @@ authors = ["Dylan McKay <me@dylanmckay.io>"]
 edition = "2018"
 
 description = "High level bindings to the simavr AVR simulator"
-repository = "git@github.com:dylanmckay/simavr-sim.git"
+repository = "https://github.com/dylanmckay/simavr-sim"
 license = "GPL-3.0"
 
 [dependencies]
