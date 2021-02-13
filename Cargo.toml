@@ -11,5 +11,5 @@ license = "GPL-3.0"
 [dependencies]
 bitflags = "1.2"
 simavr-sys = "1.5"
-tempfile = "3.1"
+tempfile = "3.2"
 vsprintf = "2.0"
